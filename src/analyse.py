@@ -122,9 +122,12 @@ def figures(cy, taille, R):
     y = np.arange(len(R))[::-1]
     for yi, r in zip(y, R):
         ax.plot(r["ic95"], [yi, yi], color=GRIS)
-        ax.plot(r["rapport_risques"], yi, "o", color=ROUGE if r["rapport_risques"] > 1 else BLEU)
+        coul = ROUGE if r["ic95"][0] > 1 else BLEU if r["ic95"][1] < 1 else GRIS
+        ax.plot(r["rapport_risques"], yi, "o", color=coul)
     ax.axvline(1, color="black", lw=0.8)
     ax.set_yticks(y, lab, fontsize=7.5); ax.set_xscale("log")
+    ticks = [0.4, 0.5, 0.7, 1, 1.5, 2, 3]
+    ax.set_xticks(ticks, [str(t).replace(".", ",") for t in ticks]); ax.minorticks_off()
     ax.set_xlabel("rapport de risques d'être tué ou hospitalisé (échelle log, IC 95 %)")
     fig.tight_layout(); fig.savefig(FIG / "03_rapports_de_risques.png", dpi=160); plt.close(fig)
 
