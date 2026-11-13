@@ -1,0 +1,96 @@
+[
+  {
+    "id": "baac:202000000011:154 742 256:0",
+    "type": "accident_corporel",
+    "source": "BAAC",
+    "id_source": "202000000011",
+    "debut": "2020-03-05T11:50",
+    "precision_temps": "minute",
+    "lon": 2.8742,
+    "lat": 50.6785,
+    "precision_position_m": null,
+    "mode": "velo",
+    "role": "conducteur",
+    "gravite": "blesse_leger",
+    "contexte": {
+      "agglomeration": true,
+      "eclairage": "jour",
+      "sur_piste_selon_source": false,
+      "antagoniste": "Véhicule léger",
+      "commune_insee": "59143"
+    },
+    "infrastructure": {
+      "classe_proximite": "Aucun aménagement à moins de 50 m",
+      "distance_separe_m": 332.0,
+      "distance_marquage_m": 125.8,
+      "source": "inventaire national des aménagements cyclables"
+    },
+    "provenance": {
+      "jeu": "BAAC 2020-2024, ONISR",
+      "licence": "Licence Ouverte 2.0",
+      "champs": [
+        "Num_Acc",
+        "an",
+        "mois",
+        "jour",
+        "hrmn",
+        "lat",
+        "long",
+        "grav",
+        "catu",
+        "catv",
+        "agg",
+        "lum",
+        "situ",
+        "com"
+      ]
+    }
+  },
+  {
+    "id": "baac:202000000014:154 742 248:0",
+    "type": "accident_corporel",
+    "source": "BAAC",
+    "id_source": "202000000014",
+    "debut": "2020-03-07T13:20",
+    "precision_temps": "minute",
+    "lon": 4.0611947,
+    "lat": 49.2556464,
+    "precision_position_m": null,
+    "mode": "velo",
+    "role": "conducteur",
+    "gravite": "blesse_leger",
+    "contexte": {
+      "agglomeration": true,
+      "eclairage": "jour",
+      "sur_piste_selon_source": false,
+      "antagoniste": "Véhicule léger",
+      "commune_insee": "51454"
+    },
+    "infrastructure": {
+      "classe_proximite": "Marquage seul à moins de 20 m",
+      "distance_separe_m": 129.0,
+      "distance_marquage_m": 11.6,
+      "source": "inventaire national des aménagements cyclables"
+    },
+    "provenance": {
+      "jeu": "BAAC 2020-2024, ONISR",
+      "licence": "Licence Ouverte 2.0",
+      "champs": [
+        "Num_Acc",
+        "an",
+        "mois",
+        "jour",
+        "hrmn",
+        "lat",
+        "long",
+        "grav",
+        "catu",
+        "catv",
+        "agg",
+        "lum",
+        "situ",
+        "com"
+      ]
+    }
+  }
+]

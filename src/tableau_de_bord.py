@@ -3,7 +3,7 @@
 - indicateurs et séries par année, matrice heure x jour
 - grille de 0,1 degré pour la carte nationale (France métropolitaine)
 - points individuels pour les Pyrénées-Atlantiques (64) et les Landes (40)
-- résultats des hypothèses
+- résultats des hypothèses, concordance des deux sources, points noirs
 
 Usage : python src/tableau_de_bord.py
 """
@@ -40,6 +40,12 @@ def main():
     hj = hj.reindex(index=range(7), columns=range(24), fill_value=0).values.tolist()
     mois = cy.groupby(cy["date"].dt.month).size().reindex(range(1, 13), fill_value=0).tolist()
 
+    pn = pd.read_csv(RACINE / "resultats" / "points_noirs.csv", dtype={"dep": str})
+    pn["adresse"] = pn["adresse"].fillna("")
+    points_noirs = pn[["lat", "lon", "accidents", "graves", "tues", "commune", "adresse", "dep", "annees"]].values.tolist()
+    synth_pn = json.loads((RACINE / "resultats" / "points_noirs.json").read_text(encoding="utf-8"))
+    info_am = TRAITE / "amenagements_info.json"
+
     data = {"periode": res["periode"], "cyclistes": res["cyclistes"], "accidents": res["accidents"], "tues": res["tues"],
             "graves": res["graves"], "par_annee": res["par_annee"], "heure_jour": hj, "mois": mois,
             "hypotheses": res["hypotheses"], "taille_commune": res["taille_commune"], "antagonistes": res["antagonistes"],
@@ -47,6 +53,11 @@ def main():
             "sud_ouest": {"colonnes": ["lat", "lon", "annee", "gravite", "agg", "situ", "commune", "antagoniste"],
                           "points": points, "communes": top_sud, "n": len(sud), "graves": int(sud["grave"].sum()),
                           "tues": int(sud["tue"].sum())},
+            "points_noirs": {"colonnes": ["lat", "lon", "accidents", "graves", "tues", "commune", "adresse", "dep", "annees"],
+                             "liste": points_noirs, **synth_pn},
+            "concordance": res.get("concordance_baac_inventaire", {}).get("20"),
+            "sensibilite_h6": res.get("sensibilite_h6", []),
+            "amenagements": json.loads(info_am.read_text(encoding="utf-8")) if info_am.exists() else None,
             "source": "BAAC 2020-2024 (ONISR, data.gouv.fr, Licence Ouverte) ; populations : geo.api.gouv.fr"}
     out = RACINE / "dashboard" / "data.json"
     out.parent.mkdir(exist_ok=True)

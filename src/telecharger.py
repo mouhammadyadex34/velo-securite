@@ -1,5 +1,6 @@
 """Étape 0 (facultative) : retélécharger la BAAC 2020-2024 sur data.gouv.fr et la restreindre aux accidents
-impliquant un vélo. Les fichiers obtenus sont ceux de data/raw/ (déjà versionnés dans le dépôt).
+impliquant un vélo, puis l'inventaire des aménagements cyclables. Les fichiers BAAC obtenus sont ceux de
+data/raw/ (déjà versionnés) ; l'inventaire, trop lourd, ne l'est pas.
 
 Usage : python src/telecharger.py
 """
@@ -14,6 +15,8 @@ from codes import VELO
 RACINE = Path(__file__).resolve().parents[1]
 BRUT = RACINE / "data" / "raw"
 API = "https://www.data.gouv.fr/api/1/datasets/53698f4ca3a729239d2036df/"
+INVENTAIRE = ("https://static.data.gouv.fr/resources/amenagements-cyclables-france-metropolitaine/20261103-150341/"
+              "france-20261103.parquet")  # Geovelo, licence ODbL, 70 Mo
 GEO = "https://geo.api.gouv.fr/communes?fields=code,nom,population,codeDepartement,codeRegion&format=json"
 TABLES = {"caracteristiques": ("ca",), "lieux": ("lieux",), "vehicules": ("vehicules",), "usagers": ("usagers",)}
 ANNEES = range(2020, 2025)
@@ -74,5 +77,14 @@ def main():
             w.writerow([c["code"], c["nom"], c.get("population", ""), c.get("codeDepartement", ""), c.get("codeRegion", ""), typ])
 
 
+def inventaire():
+    """Inventaire national des aménagements cyclables (non versionné, utilisé par amenagements.py)."""
+    from amenagements import SOURCE
+    with urlopen(INVENTAIRE) as r, open(SOURCE, "wb") as f:
+        while bloc := r.read(1 << 20):
+            f.write(bloc)
+
+
 if __name__ == "__main__":
     main()
+    inventaire()

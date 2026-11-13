@@ -110,6 +110,7 @@ def preparer():
     c["taille_ville"] = c["pop_ville"].map(classe_taille)
 
     acc = c.merge(lieu, on="Num_Acc", how="left").merge(veh, on="Num_Acc", how="left")
+    acc["pieton_implique"] = acc["Num_Acc"].isin(set(u.loc[u["catu"] == "3", "Num_Acc"]))
 
     # --- Cyclistes : usagers conducteurs ou passagers d'un vélo (on exclut les piétons heurtés par un vélo)
     velos = v.loc[v["est_velo"], ["Num_Acc", "id_vehicule", "catv"]]
@@ -123,7 +124,7 @@ def preparer():
     cy["age"] = pd.to_numeric(cy["annee"], errors="coerce") - pd.to_numeric(cy["an_nais"], errors="coerce")
     cy["casque"] = cy[["secu1", "secu2", "secu3"]].eq("2").any(axis=1)
     cy["vae"] = cy["catv"] == "80"
-    cols_acc = ["Num_Acc", "date", "heure", "jour_semaine", "lum", "agg", "int", "atm", "col", "dep", "com", "commune",
+    cols_acc = ["Num_Acc", "date", "hrmn", "heure", "jour_semaine", "lum", "agg", "int", "atm", "col", "dep", "com", "commune",
                 "taille_ville", "lat", "long", "metropole", "catr", "vma", "surf", "situ", "voie_avec_piste_ou_bande",
                 "accident_sur_piste", "nb_vehicules", "antagoniste"]
     cy = cy.merge(acc[cols_acc], on="Num_Acc", how="left")

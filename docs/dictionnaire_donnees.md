@@ -100,3 +100,21 @@ Clé de jointure : `Num_Acc` relie les quatre tables ; `id_vehicule` relie un us
 | `actp` | Action du piéton | 51% | 13 | `0` ; `3` ; `1` |
 | `etatp` | Piéton seul ou non | 3% | 4 | `2` ; `1` ; `3` |
 | `id_usager` | Identifiant unique de l'usager (à partir de 2021) | 82% | 45304 | `267 638` ; `267 639` ; `267 625` |
+
+## Seconde source : inventaire des aménagements cyclables
+
+Aménagements cyclables France métropolitaine (Geovelo et contributeurs OpenStreetMap, data.gouv.fr, licence ODbL) : 417 172 tronçons, mises à jour du 2007-04-01 au 2026-10-29. Chaque tronçon décrit l'aménagement du côté droit (`ame_d`) et du côté gauche (`ame_g`). La table dérivée ci-dessous est diffusée sous la même licence ODbL.
+
+| Catégorie | Valeurs de `ame_d` ou `ame_g` | Longueur |
+|---|---|---:|
+| Séparé de la circulation | amenagement mixte pieton velo hors voie verte; double sens cyclable piste; piste cyclable; voie verte | 39 882 km |
+| Marquage sur chaussée | accotement revetu hors cvcb; bande cyclable; chaussee a voie centrale banalisee; couloir bus+velo; double sens cyclable bande; double sens cyclable non materialise; velo rue | 20 635 km |
+
+Table dérivée `data/processed/proximite_amenagements.csv`, une ligne par accident de métropole :
+
+| Variable | Description |
+|---|---|
+| `Num_Acc` | Identifiant de l'accident (BAAC) |
+| `dist_separe_m` | Distance en mètres au plus proche aménagement séparé (vide au-delà de 500 m) |
+| `dist_marquage_m` | Distance en mètres au plus proche marquage cyclable (vide au-delà de 500 m) |
+| `proximite` | Classe : aménagement séparé à moins de 20 m, sinon marquage seul à moins de 20 m, sinon aménagement entre 20 et 50 m, sinon aucun à moins de 50 m |

@@ -235,8 +235,188 @@
         1.04
       ],
       "p_valeur": 0.481
+    },
+    {
+      "hypothese": "H3 Piste cyclable",
+      "strate": "En agglomération, ajusté",
+      "groupe": "Sur piste cyclable",
+      "reference": "Sur chaussée",
+      "n_groupe": 4631,
+      "graves_groupe": 466,
+      "part_groupe": 0.1006,
+      "n_reference": 17889,
+      "graves_reference": 4029,
+      "part_reference": 0.2252,
+      "rapport_risques": 0.68,
+      "ic95": [
+        0.62,
+        0.74
+      ],
+      "p_valeur": 4.08e-18,
+      "ajuste_sur": "taille de la commune",
+      "rapport_risques_brut": 0.45
+    },
+    {
+      "hypothese": "H6 Aménagement (inventaire)",
+      "strate": "En agglomération",
+      "groupe": "Aménagement séparé à moins de 20 m",
+      "reference": "Aucun aménagement à moins de 50 m",
+      "n_groupe": 9416,
+      "graves_groupe": 1329,
+      "part_groupe": 0.1411,
+      "n_reference": 6497,
+      "graves_reference": 2239,
+      "part_reference": 0.3446,
+      "rapport_risques": 0.41,
+      "ic95": [
+        0.39,
+        0.43
+      ],
+      "p_valeur": 9.38e-201
+    },
+    {
+      "hypothese": "H6 Aménagement (inventaire)",
+      "strate": "En agglomération, ajusté",
+      "groupe": "Aménagement séparé à moins de 20 m",
+      "reference": "Aucun aménagement à moins de 50 m",
+      "n_groupe": 9416,
+      "graves_groupe": 1329,
+      "part_groupe": 0.1411,
+      "n_reference": 6497,
+      "graves_reference": 2239,
+      "part_reference": 0.3446,
+      "rapport_risques": 0.82,
+      "ic95": [
+        0.77,
+        0.87
+      ],
+      "p_valeur": 1.3e-09,
+      "ajuste_sur": "taille de la commune",
+      "rapport_risques_brut": 0.41
+    },
+    {
+      "hypothese": "H6 Aménagement (inventaire)",
+      "strate": "En agglomération",
+      "groupe": "Marquage seul à moins de 20 m",
+      "reference": "Aucun aménagement à moins de 50 m",
+      "n_groupe": 6094,
+      "graves_groupe": 806,
+      "part_groupe": 0.1323,
+      "n_reference": 6497,
+      "graves_reference": 2239,
+      "part_reference": 0.3446,
+      "rapport_risques": 0.38,
+      "ic95": [
+        0.36,
+        0.41
+      ],
+      "p_valeur": 5.82e-170
+    },
+    {
+      "hypothese": "H6 Aménagement (inventaire)",
+      "strate": "En agglomération, ajusté",
+      "groupe": "Marquage seul à moins de 20 m",
+      "reference": "Aucun aménagement à moins de 50 m",
+      "n_groupe": 6094,
+      "graves_groupe": 806,
+      "part_groupe": 0.1323,
+      "n_reference": 6497,
+      "graves_reference": 2239,
+      "part_reference": 0.3446,
+      "rapport_risques": 0.75,
+      "ic95": [
+        0.69,
+        0.81
+      ],
+      "p_valeur": 3.79e-12,
+      "ajuste_sur": "taille de la commune",
+      "rapport_risques_brut": 0.38
     }
   ],
+  "sensibilite_h6": [
+    {
+      "seuil_m": 10,
+      "n": 7643,
+      "rapport_risques_brut": 0.38,
+      "rapport_risques": 0.8,
+      "ic95": [
+        0.74,
+        0.86
+      ]
+    },
+    {
+      "seuil_m": 20,
+      "n": 9416,
+      "rapport_risques_brut": 0.41,
+      "rapport_risques": 0.82,
+      "ic95": [
+        0.77,
+        0.87
+      ]
+    },
+    {
+      "seuil_m": 30,
+      "n": 10146,
+      "rapport_risques_brut": 0.41,
+      "rapport_risques": 0.82,
+      "ic95": [
+        0.77,
+        0.87
+      ]
+    },
+    {
+      "seuil_m": 50,
+      "n": 11053,
+      "rapport_risques_brut": 0.43,
+      "rapport_risques": 0.83,
+      "ic95": [
+        0.78,
+        0.88
+      ]
+    }
+  ],
+  "concordance_baac_inventaire": {
+    "10": {
+      "seuil_m": 10,
+      "accidents": 26863,
+      "baac_sur_piste": 4270,
+      "baac_sur_piste_et_inventaire": 2710,
+      "part_baac_confirmee": 0.635,
+      "inventaire_proche": 7455,
+      "inventaire_proche_mais_baac_hors_piste": 4745,
+      "part_inventaire_proche_note_sur_piste": 0.364
+    },
+    "20": {
+      "seuil_m": 20,
+      "accidents": 26863,
+      "baac_sur_piste": 4270,
+      "baac_sur_piste_et_inventaire": 3046,
+      "part_baac_confirmee": 0.713,
+      "inventaire_proche": 9236,
+      "inventaire_proche_mais_baac_hors_piste": 6190,
+      "part_inventaire_proche_note_sur_piste": 0.33
+    },
+    "30": {
+      "seuil_m": 30,
+      "accidents": 26863,
+      "baac_sur_piste": 4270,
+      "baac_sur_piste_et_inventaire": 3151,
+      "part_baac_confirmee": 0.738,
+      "inventaire_proche": 9989,
+      "inventaire_proche_mais_baac_hors_piste": 6838,
+      "part_inventaire_proche_note_sur_piste": 0.315
+    },
+    "50": {
+      "seuil_m": 50,
+      "accidents": 26863,
+      "baac_sur_piste": 4270,
+      "baac_sur_piste_et_inventaire": 3289,
+      "part_baac_confirmee": 0.77,
+      "inventaire_proche": 10922,
+      "inventaire_proche_mais_baac_hors_piste": 7633,
+      "part_inventaire_proche_note_sur_piste": 0.301
+    }
+  },
   "taille_commune": [
     {
       "taille_ville": "1. Moins de 2 000 hab.",

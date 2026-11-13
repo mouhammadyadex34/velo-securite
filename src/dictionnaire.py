@@ -60,6 +60,25 @@ def main():
              f"- Format de `mois` selon l'année : {q['formats_mois_par_annee']} ; d'où 21 valeurs distinctes pour 12 mois.", ""]
     for t, f in FICHIERS.items():
         parts += [section(t, pd.read_csv(RACINE / "data" / "raw" / f, dtype=str, keep_default_na=False)), ""]
+    info = RACINE / "data" / "processed" / "amenagements_info.json"
+    if info.exists():
+        from amenagements import MARQUAGE, SEPARE, SEUIL_M
+        i = json.loads(info.read_text(encoding="utf-8"))
+        parts += ["## Seconde source : inventaire des aménagements cyclables", "",
+                  "Aménagements cyclables France métropolitaine (Geovelo et contributeurs OpenStreetMap, data.gouv.fr, "
+                  f"licence ODbL) : {i['troncons']:_} tronçons, mises à jour du {i['date_maj_min']} au {i['date_maj_max']}. ".replace("_", " ")
+                  + "Chaque tronçon décrit l'aménagement du côté droit (`ame_d`) et du côté gauche (`ame_g`). "
+                  "La table dérivée ci-dessous est diffusée sous la même licence ODbL.", "",
+                  "| Catégorie | Valeurs de `ame_d` ou `ame_g` | Longueur |", "|---|---|---:|",
+                  f"| Séparé de la circulation | {'; '.join(sorted(SEPARE)).lower()} | {i['km_par_categorie']['separe']:_} km".replace("_", " ") + " |",
+                  f"| Marquage sur chaussée | {'; '.join(sorted(MARQUAGE)).lower()} | {i['km_par_categorie']['marquage']:_} km".replace("_", " ") + " |", "",
+                  "Table dérivée `data/processed/proximite_amenagements.csv`, une ligne par accident de métropole :", "",
+                  "| Variable | Description |", "|---|---|",
+                  "| `Num_Acc` | Identifiant de l'accident (BAAC) |",
+                  "| `dist_separe_m` | Distance en mètres au plus proche aménagement séparé (vide au-delà de 500 m) |",
+                  "| `dist_marquage_m` | Distance en mètres au plus proche marquage cyclable (vide au-delà de 500 m) |",
+                  f"| `proximite` | Classe : aménagement séparé à moins de {SEUIL_M} m, sinon marquage seul à moins de {SEUIL_M} m, "
+                  "sinon aménagement entre 20 et 50 m, sinon aucun à moins de 50 m |", ""]
     out = RACINE / "docs" / "dictionnaire_donnees.md"
     out.parent.mkdir(exist_ok=True)
     out.write_text("\n".join(parts), encoding="utf-8")

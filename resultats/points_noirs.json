@@ -1,0 +1,15 @@
+{
+  "rayon_m": 50,
+  "minimum_accidents": 5,
+  "points_noirs": 292,
+  "accidents_dans_un_point_noir": 2298,
+  "part_des_accidents": 0.085,
+  "graves_dans_un_point_noir": 110,
+  "part_accidents_graves_dans_points_noirs": 0.048,
+  "part_accidents_graves_ailleurs": 0.305,
+  "part_sans_autre_vehicule_dans_points_noirs": 0.273,
+  "part_sans_autre_vehicule_ailleurs": 0.166,
+  "part_pieton_implique_dans_points_noirs": 0.13,
+  "part_pieton_implique_ailleurs": 0.055,
+  "sud_ouest": 6
+}

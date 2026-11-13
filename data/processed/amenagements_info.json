@@ -1,0 +1,13 @@
+{
+  "troncons": 417172,
+  "date_maj_min": "2007-04-01",
+  "date_maj_max": "2026-10-29",
+  "troncons_par_categorie": {
+    "separe": 222986,
+    "marquage": 151196
+  },
+  "km_par_categorie": {
+    "marquage": 20635,
+    "separe": 39882
+  }
+}
