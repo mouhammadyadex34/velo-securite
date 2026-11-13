@@ -1,0 +1,31 @@
+{
+  "lignes_brutes": {
+    "caracteristiques": 27885,
+    "lieux": 33045,
+    "vehicules": 51735,
+    "usagers": 55056
+  },
+  "accidents_doublons_caracteristiques": 0,
+  "coordonnees_manquantes": 0,
+  "accidents_outre_mer": 958,
+  "dates_invalides": 0,
+  "formats_mois_par_annee": {
+    "2020": "sans zéro (3)",
+    "2021": "sur deux chiffres (03)",
+    "2022": "sur deux chiffres (03)",
+    "2023": "sur deux chiffres (03)",
+    "2024": "sur deux chiffres (03)"
+  },
+  "lieux_plusieurs_lignes": {
+    "2020": 0,
+    "2021": 0,
+    "2022": 0,
+    "2023": 2602,
+    "2024": 2515
+  },
+  "communes_inconnues": 57,
+  "pietons_rattaches_a_un_velo_exclus": 1679,
+  "gravite_non_renseignee": 11,
+  "accidents_finaux": 27885,
+  "cyclistes_finaux": 29446
+}

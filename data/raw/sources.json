@@ -1,0 +1,105 @@
+{
+  "extrait_le": "2026-11-13T09:01:57.547Z",
+  "baac": {
+    "dataset": "https://www.data.gouv.fr/fr/datasets/bases-de-donnees-annuelles-des-accidents-corporels-de-la-circulation-routiere-annees-de-2005-a-2024/",
+    "licence": "Licence Ouverte (fr-lo)",
+    "fichiers": {
+      "2020": {
+        "caract": "caracteristiques-2020.csv | https://static.data.gouv.fr/resources/bases-de-donnees-annuelles-des-accidents-corporels-de-la-circulation-routiere-annees-de-2005-a-2019/20211110-111202/caracteristiques-2020.csv",
+        "lieux": "lieux-2020.csv | https://static.data.gouv.fr/resources/bases-de-donnees-annuelles-des-accidents-corporels-de-la-circulation-routiere-annees-de-2005-a-2019/20211110-111603/lieux-2020.csv",
+        "vehicules": "vehicules-2020.csv | https://static.data.gouv.fr/resources/bases-de-donnees-annuelles-des-accidents-corporels-de-la-circulation-routiere-annees-de-2005-a-2019/20211110-111722/vehicules-2020.csv",
+        "usagers": "usagers-2020.csv | https://static.data.gouv.fr/resources/bases-de-donnees-annuelles-des-accidents-corporels-de-la-circulation-routiere-annees-de-2005-a-2019/20211110-111817/usagers-2020.csv"
+      },
+      "2021": {
+        "caract": "carcteristiques-2021.csv | https://static.data.gouv.fr/resources/bases-de-donnees-annuelles-des-accidents-corporels-de-la-circulation-routiere-annees-de-2005-a-2020/20221024-113743/carcteristiques-2021.csv",
+        "lieux": "lieux-2021.csv | https://static.data.gouv.fr/resources/bases-de-donnees-annuelles-des-accidents-corporels-de-la-circulation-routiere-annees-de-2005-a-2020/20221024-113901/lieux-2021.csv",
+        "vehicules": "vehicules-2021.csv | https://static.data.gouv.fr/resources/bases-de-donnees-annuelles-des-accidents-corporels-de-la-circulation-routiere-annees-de-2005-a-2020/20221024-113925/vehicules-2021.csv",
+        "usagers": "usagers-2021.csv | https://static.data.gouv.fr/resources/bases-de-donnees-annuelles-des-accidents-corporels-de-la-circulation-routiere-annees-de-2005-a-2022/20231009-140337/usagers-2021.csv"
+      },
+      "2022": {
+        "caract": "carcteristiques-2022.csv | https://static.data.gouv.fr/resources/bases-de-donnees-annuelles-des-accidents-corporels-de-la-circulation-routiere-annees-de-2005-a-2021/20231005-093927/carcteristiques-2022.csv",
+        "lieux": "lieux-2022.csv | https://static.data.gouv.fr/resources/bases-de-donnees-annuelles-des-accidents-corporels-de-la-circulation-routiere-annees-de-2005-a-2021/20231005-094112/lieux-2022.csv",
+        "vehicules": "vehicules-2022.csv | https://static.data.gouv.fr/resources/bases-de-donnees-annuelles-des-accidents-corporels-de-la-circulation-routiere-annees-de-2005-a-2021/20231005-094147/vehicules-2022.csv",
+        "usagers": "usagers-2022.csv | https://static.data.gouv.fr/resources/bases-de-donnees-annuelles-des-accidents-corporels-de-la-circulation-routiere-annees-de-2005-a-2021/20231005-094229/usagers-2022.csv"
+      },
+      "2023": {
+        "caract": "caract-2023.csv | https://static.data.gouv.fr/resources/bases-de-donnees-annuelles-des-accidents-corporels-de-la-circulation-routiere-annees-de-2005-a-2023/20241028-103125/caract-2023.csv",
+        "lieux": "lieux-2023.csv | https://static.data.gouv.fr/resources/bases-de-donnees-annuelles-des-accidents-corporels-de-la-circulation-routiere-annees-de-2005-a-2023/20241023-153219/lieux-2023.csv",
+        "vehicules": "vehicules-2023.csv | https://static.data.gouv.fr/resources/bases-de-donnees-annuelles-des-accidents-corporels-de-la-circulation-routiere-annees-de-2005-a-2023/20241023-153253/vehicules-2023.csv",
+        "usagers": "usagers-2023.csv | https://static.data.gouv.fr/resources/bases-de-donnees-annuelles-des-accidents-corporels-de-la-circulation-routiere-annees-de-2005-a-2023/20241023-153328/usagers-2023.csv"
+      },
+      "2024": {
+        "caract": "Caract_2024.csv | https://static.data.gouv.fr/resources/bases-de-donnees-annuelles-des-accidents-corporels-de-la-circulation-routiere-annees-de-2005-a-2024/20251021-115900/caract-2024.csv",
+        "lieux": "Lieux_2024.csv | https://static.data.gouv.fr/resources/bases-de-donnees-annuelles-des-accidents-corporels-de-la-circulation-routiere-annees-de-2005-a-2024/20251021-115812/lieux-2024.csv",
+        "vehicules": "Vehicules_2024.csv | https://static.data.gouv.fr/resources/bases-de-donnees-annuelles-des-accidents-corporels-de-la-circulation-routiere-annees-de-2005-a-2024/20251107-100240/vehicules-2024.csv",
+        "usagers": "Usagers_2024.csv | https://static.data.gouv.fr/resources/bases-de-donnees-annuelles-des-accidents-corporels-de-la-circulation-routiere-annees-de-2005-a-2024/20251021-115506/usagers-2024.csv"
+      }
+    },
+    "filtre": "accidents dont au moins un véhicule a catv = 1 (bicyclette) ou 80 (VAE)",
+    "totaux_nationaux": {
+      "2020": {
+        "velo_acc": 5113,
+        "caract": 5113,
+        "caract_total": 47744,
+        "lieux": 5113,
+        "lieux_total": 47744,
+        "vehicules": 9484,
+        "vehicules_total": 81066,
+        "usagers": 9753,
+        "usagers_total": 105295
+      },
+      "2021": {
+        "velo_acc": 5851,
+        "caract": 5851,
+        "caract_total": 56518,
+        "lieux": 5851,
+        "lieux_total": 56518,
+        "vehicules": 10902,
+        "vehicules_total": 97315,
+        "diff_usagers": "Num_Acc,id_usager,id_vehicule,num_veh,place,catu,grav,sexe,an_nais,trajet,secu1,secu2,secu3,locp,actp,etatp",
+        "usagers": 11647,
+        "usagers_total": 129248
+      },
+      "2022": {
+        "velo_acc": 5780,
+        "caract": 5780,
+        "caract_total": 55302,
+        "lieux": 5780,
+        "lieux_total": 55302,
+        "vehicules": 10766,
+        "vehicules_total": 94493,
+        "diff_usagers": "Num_Acc,id_usager,id_vehicule,num_veh,place,catu,grav,sexe,an_nais,trajet,secu1,secu2,secu3,locp,actp,etatp",
+        "usagers": 11523,
+        "usagers_total": 126662
+      },
+      "2023": {
+        "velo_acc": 5618,
+        "caract": 5618,
+        "caract_total": 54822,
+        "lieux": 8241,
+        "lieux_total": 70860,
+        "vehicules": 10388,
+        "vehicules_total": 93585,
+        "diff_usagers": "Num_Acc,id_usager,id_vehicule,num_veh,place,catu,grav,sexe,an_nais,trajet,secu1,secu2,secu3,locp,actp,etatp",
+        "usagers": 11169,
+        "usagers_total": 125789
+      },
+      "2024": {
+        "velo_acc": 5523,
+        "caract": 5523,
+        "caract_total": 54402,
+        "lieux": 8060,
+        "lieux_total": 70248,
+        "vehicules": 10195,
+        "vehicules_total": 92678,
+        "diff_usagers": "Num_Acc,id_usager,id_vehicule,num_veh,place,catu,grav,sexe,an_nais,trajet,secu1,secu2,secu3,locp,actp,etatp",
+        "usagers": 10964,
+        "usagers_total": 125187
+      }
+    }
+  },
+  "communes": {
+    "source": "https://geo.api.gouv.fr/communes (+ arrondissements municipaux)",
+    "licence": "Licence Ouverte"
+  }
+}

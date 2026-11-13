@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Accidents de vélo en France, 2020-2024</title>
+<meta name="description" content="Tableau de bord des accidents corporels impliquant un cycliste en France (BAAC 2020-2024) : carte, saisons, heures, hypothèses sur la gravité.">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<style>
+:root{--ink:#14202b;--muted:#5d6975;--line:#dde3e8;--bg:#f7f8f6;--card:#fff;--blue:#1b4f86;--blue2:#7fa7cf;--red:#b83227;--amber:#d98c1f}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg);line-height:1.45}
+header,main,footer{max-width:1180px;margin:0 auto;padding:0 20px}
+header{padding-top:28px}
+h1{font-size:clamp(1.5rem,3vw,2.1rem);margin:0 0 6px;letter-spacing:-.01em}
+.sous{color:var(--muted);margin:0 0 18px;max-width:70ch}
+.chiffres{display:flex;flex-wrap:wrap;gap:8px 28px;padding:14px 0;border-top:2px solid var(--ink);border-bottom:1px solid var(--line);margin-bottom:22px}
+.chiffres div{min-width:120px}.chiffres b{display:block;font-size:1.45rem;font-variant-numeric:tabular-nums}.chiffres span{color:var(--muted);font-size:.85rem}
+.grille{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+section{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:16px 18px}
+section h2{font-size:1.02rem;margin:0 0 4px}
+section p.note{color:var(--muted);font-size:.85rem;margin:0 0 10px}
+.c12{grid-column:span 12}.c7{grid-column:span 7}.c5{grid-column:span 5}.c6{grid-column:span 6}
+@media (max-width:860px){.c7,.c5,.c6{grid-column:span 12}}
+#carte{height:520px;border-radius:4px}
+.outils{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
+.outils button{font:inherit;font-size:.86rem;border:1px solid var(--line);background:#fff;padding:5px 11px;border-radius:4px;cursor:pointer}
+.outils button[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.outils select{font:inherit;font-size:.86rem;padding:4px 6px}
+.legende{display:flex;gap:14px;flex-wrap:wrap;font-size:.8rem;color:var(--muted);margin-top:8px}
+.legende i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+svg text{font-size:11px;fill:var(--muted)}
+table{border-collapse:collapse;width:100%;font-size:.88rem}
+th,td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:right}th:first-child,td:first-child{text-align:left}
+th{font-weight:600;color:var(--muted);font-size:.8rem}
+.hyp{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:4px 16px;align-items:center;border-bottom:1px solid var(--line);padding:9px 0}
+.hyp:last-child{border-bottom:0}.hyp .t{font-size:.9rem}.hyp .t small{display:block;color:var(--muted)}
+@media (max-width:600px){.hyp{grid-template-columns:1fr}}
+footer{color:var(--muted);font-size:.83rem;padding:24px 20px 40px}
+footer a,section a{color:var(--blue)}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+</style>
+</head>
+<body>
+<header>
+  <h1>Accidents de vélo en France, 2020-2024</h1>
+  <p class="sous">Tous les accidents corporels impliquant une bicyclette ou un vélo à assistance électrique, d'après les fiches BAAC remplies par les forces de l'ordre. « Grave » signifie tué dans les 30 jours ou hospitalisé plus de 24 heures.</p>
+  <div class="chiffres" id="chiffres"></div>
+</header>
+<main class="grille">
+  <section class="c12" aria-labelledby="t-carte">
+    <h2 id="t-carte">Où ont lieu les accidents</h2>
+    <p class="note" id="note-carte"></p>
+    <div class="outils">
+      <button type="button" data-vue="france" aria-pressed="true">France métropolitaine</button>
+      <button type="button" data-vue="sud" aria-pressed="false">Pays basque, Béarn et Landes</button>
+      <label for="annee" style="margin-left:auto;font-size:.86rem">Année</label>
+      <select id="annee"><option value="">2020 à 2024</option></select>
+    </div>
+    <div id="carte" role="region" aria-label="Carte des accidents"></div>
+    <div class="legende" id="legende"></div>
+  </section>
+
+  <section class="c7" aria-labelledby="t-an">
+    <h2 id="t-an">Cyclistes victimes par an</h2>
+    <p class="note">En bleu foncé, les cyclistes gravement atteints. Sous chaque année, la part des victimes qui roulaient en vélo à assistance électrique (VAE).</p>
+    <svg id="g-an" viewBox="0 0 560 230" role="img" aria-label="Cyclistes victimes par an"></svg>
+  </section>
+  <section class="c5" aria-labelledby="t-mois">
+    <h2 id="t-mois">Par mois</h2>
+    <p class="note">Le vélo est saisonnier : les accidents suivent la pratique.</p>
+    <svg id="g-mois" viewBox="0 0 420 230" role="img" aria-label="Cyclistes victimes par mois"></svg>
+  </section>
+
+  <section class="c12" aria-labelledby="t-hj">
+    <h2 id="t-hj">Heure et jour de la semaine</h2>
+    <p class="note">Les pics de 8 h et 17-18 h en semaine correspondent aux trajets domicile-travail ; le week-end, ils se répartissent entre la fin de matinée et l'après-midi, au rythme des sorties de loisir.</p>
+    <svg id="g-hj" viewBox="0 0 960 200" role="img" aria-label="Cyclistes victimes par heure et jour"></svg>
+  </section>
+
+  <section class="c12" aria-labelledby="t-hyp">
+    <h2 id="t-hyp">Ce qui aggrave ou réduit la gravité : cinq hypothèses testées</h2>
+    <p class="note">Rapport de risques d'être tué ou hospitalisé, avec son intervalle de confiance à 95 %. Une barre à droite de la ligne signifie plus grave que le groupe de référence. Ce sont des associations, pas des causes : voir les limites en bas de page.</p>
+    <div id="hyp"></div>
+  </section>
+
+  <section class="c6" aria-labelledby="t-taille">
+    <h2 id="t-taille">Selon la taille de la commune</h2>
+    <p class="note">Les grandes villes ont beaucoup d'accidents mais peu de graves ; les petites communes, moins d'accidents mais deux sur trois sont graves.</p>
+    <table id="taille"></table>
+  </section>
+  <section class="c6" aria-labelledby="t-ant">
+    <h2 id="t-ant">Selon le véhicule en face</h2>
+    <p class="note">Véhicule le plus lourd impliqué avec le cycliste.</p>
+    <table id="antagoniste"></table>
+  </section>
+</main>
+<footer>
+  <p><b>Sources.</b> Bases annuelles des accidents corporels de la circulation routière (BAAC), ONISR, <a href="https://www.data.gouv.fr/fr/datasets/bases-de-donnees-annuelles-des-accidents-corporels-de-la-circulation-routiere-annees-de-2005-a-2024/">data.gouv.fr</a>, Licence Ouverte. Populations communales : geo.api.gouv.fr. Fond de carte : © contributeurs OpenStreetMap.</p>
+  <p><b>Limites.</b> La BAAC ne recense que les accidents connus des forces de l'ordre : les chutes seules et les blessures légères sont sous-déclarées, davantage hors des grandes villes, ce qui gonfle la part d'accidents graves dans les petites communes. Aucune donnée d'exposition (kilomètres parcourus à vélo) n'est disponible : un taux pour 100 000 habitants ne mesure pas un risque par trajet.</p>
+  <p>Méthode, dictionnaire des données et code : <a href="https://github.com/mouhammadyadex34/velo-securite">github.com/mouhammadyadex34/velo-securite</a>.</p>
+</footer>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+const fmt = n => n.toLocaleString("fr-FR");
+const pct = x => (x * 100).toLocaleString("fr-FR", {maximumFractionDigits: 1}) + " %";
+const NS = "http://www.w3.org/2000/svg";
+function el(svg, tag, a, txt) { const e = document.createElementNS(NS, tag); for (const k in a) e.setAttribute(k, a[k]); if (txt != null) e.textContent = txt; svg.appendChild(e); return e; }
+
+fetch("data.json").then(r => r.json()).then(D => {
+  // Chiffres clés
+  const sud = D.sud_ouest;
+  document.getElementById("chiffres").innerHTML = [
+    [fmt(D.cyclistes), "cyclistes victimes"], [fmt(D.graves), "tués ou hospitalisés"], [fmt(D.tues), "tués"],
+    [pct(D.graves / D.cyclistes), "des victimes gravement atteintes"], [fmt(sud.n), "victimes dans le 64 et le 40"]
+  ].map(([v, l]) => `<div><b>${v}</b><span>${l}</span></div>`).join("");
+
+  // Par an
+  const ans = Object.keys(D.par_annee), A = Object.values(D.par_annee), g = document.getElementById("g-an");
+  const maxA = Math.max(...A.map(a => a.victimes)), w = 70, x0 = 50, h = 160;
+  ans.forEach((an, i) => {
+    const a = A[i], x = x0 + i * (w + 30), hv = a.victimes / maxA * h, hg = a.graves / maxA * h;
+    el(g, "rect", {x, y: 180 - hv, width: w, height: hv, fill: "#7fa7cf"});
+    el(g, "rect", {x, y: 180 - hg, width: w, height: hg, fill: "#1b4f86"});
+    el(g, "text", {x: x + w / 2, y: 174 - hv, "text-anchor": "middle"}, fmt(a.victimes));
+    el(g, "text", {x: x + w / 2, y: 196, "text-anchor": "middle", style: "fill:#14202b;font-weight:600"}, an);
+    el(g, "text", {x: x + w / 2, y: 212, "text-anchor": "middle"}, "VAE " + pct(a.part_vae));
+    el(g, "text", {x: x + w / 2, y: 176 - hg + 14, "text-anchor": "middle", style: "fill:#fff"}, a.tues + " tués");
+  });
+
+  // Par mois
+  const gm = document.getElementById("g-mois"), M = D.mois, maxM = Math.max(...M), noms = "JFMAMJJASOND";
+  M.forEach((v, i) => {
+    const hv = v / maxM * 160, x = 20 + i * 32;
+    el(gm, "rect", {x, y: 180 - hv, width: 24, height: hv, fill: i >= 4 && i <= 8 ? "#1b4f86" : "#7fa7cf"});
+    el(gm, "text", {x: x + 12, y: 196, "text-anchor": "middle"}, noms[i]);
+  });
+
+  // Heure x jour
+  const gh = document.getElementById("g-hj"), HJ = D.heure_jour, maxH = Math.max(...HJ.flat()), jours = ["lun", "mar", "mer", "jeu", "ven", "sam", "dim"];
+  HJ.forEach((row, j) => {
+    el(gh, "text", {x: 30, y: 22 + j * 24, "text-anchor": "end"}, jours[j]);
+    row.forEach((v, hh) => {
+      const t = v / maxH;
+      el(gh, "rect", {x: 40 + hh * 38, y: 8 + j * 24, width: 36, height: 22, fill: `rgba(27,79,134,${0.06 + 0.94 * t})`}).appendChild(Object.assign(document.createElementNS(NS, "title"), {textContent: `${jours[j]} ${hh} h : ${fmt(v)} cyclistes`}));
+    });
+  });
+  for (let hh = 0; hh < 24; hh += 2) el(gh, "text", {x: 40 + hh * 38 + 18, y: 192, "text-anchor": "middle"}, hh + " h");
+
+  // Hypothèses
+  const lo = 0.3, hi = 4, X = v => 10 + (Math.log(v) - Math.log(lo)) / (Math.log(hi) - Math.log(lo)) * 240;
+  document.getElementById("hyp").innerHTML = D.hypotheses.map(h => {
+    const sens = h.ic95[0] > 1 ? "plus grave" : h.ic95[1] < 1 ? "moins grave" : "pas de différence nette";
+    const coul = h.ic95[0] > 1 ? "#b83227" : h.ic95[1] < 1 ? "#1b4f86" : "#9aa5b1";
+    return `<div class="hyp"><div class="t"><b>${h.groupe}</b> vs ${h.reference.toLowerCase()}${h.strate ? " (" + h.strate.toLowerCase() + ")" : ""} : ${sens}
+      <small>${pct(h.part_groupe)} de victimes graves contre ${pct(h.part_reference)} · rapport ${h.rapport_risques.toLocaleString("fr-FR")} [${h.ic95.map(v => v.toLocaleString("fr-FR")).join(" ; ")}] · ${fmt(h.n_groupe)} et ${fmt(h.n_reference)} cyclistes</small></div>
+      <svg viewBox="0 0 260 26" aria-hidden="true"><line x1="${X(1)}" x2="${X(1)}" y1="0" y2="26" stroke="#14202b"/>
+      <line x1="${X(h.ic95[0])}" x2="${X(h.ic95[1])}" y1="13" y2="13" stroke="${coul}" stroke-width="3"/><circle cx="${X(h.rapport_risques)}" cy="13" r="5" fill="${coul}"/></svg></div>`;
+  }).join("");
+
+  // Tableaux
+  document.getElementById("taille").innerHTML = "<tr><th>Commune</th><th>Victimes</th><th>Pour 100 000 hab. par an</th><th>Part graves</th></tr>" +
+    D.taille_commune.map(t => `<tr><td>${t.taille_ville.slice(3)}</td><td>${fmt(t.victimes)}</td><td>${t.victimes_par_100k_par_an.toLocaleString("fr-FR")}</td><td>${pct(t.part_graves)}</td></tr>`).join("");
+  document.getElementById("antagoniste").innerHTML = "<tr><th>Véhicule</th><th>Victimes</th><th>Part graves</th></tr>" +
+    [...D.antagonistes].sort((a, b) => b.n - a.n).map(t => `<tr><td>${t.antagoniste}</td><td>${fmt(t.n)}</td><td>${pct(t.part_graves)}</td></tr>`).join("");
+
+  // Carte
+  const carte = L.map("carte", {scrollWheelZoom: false}).setView([46.6, 2.4], 6);
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {maxZoom: 17, attribution: "© OpenStreetMap"}).addTo(carte);
+  let couche = null, vue = "france";
+  const selA = document.getElementById("annee");
+  ans.forEach(a => selA.add(new Option(a, a)));
+  const C = D.grille.cellules, pas = D.grille.pas, maxC = Math.max(...C.map(c => c[2]));
+  function dessiner() {
+    if (couche) carte.removeLayer(couche);
+    const an = selA.value;
+    if (vue === "france") {
+      selA.disabled = true;
+      couche = L.layerGroup(C.map(([la, lo2, n, gr, tu]) => {
+        const t = Math.sqrt(n / maxC);
+        return L.rectangle([[la - pas / 2, lo2 - pas / 2], [la + pas / 2, lo2 + pas / 2]], {stroke: false, fillColor: gr / n > 0.5 ? "#b83227" : "#1b4f86", fillOpacity: 0.15 + 0.75 * t})
+          .bindTooltip(`${fmt(n)} cyclistes victimes, dont ${fmt(gr)} graves et ${tu} tués`);
+      })).addTo(carte);
+      document.getElementById("note-carte").textContent = "Maille de 0,1° (environ 10 km). Plus la maille est foncée, plus il y a de victimes ; en rouge, les mailles où plus de la moitié des victimes sont graves, surtout à la campagne.";
+      document.getElementById("legende").innerHTML = '<span><i style="background:#1b4f86"></i>majorité de blessés légers</span><span><i style="background:#b83227"></i>majorité de victimes graves</span>';
+    } else {
+      selA.disabled = false;
+      const P = sud.points.filter(p => !an || String(p[2]) === an), coul = ["#7fa7cf", "#d98c1f", "#b83227"], lib = ["blessé léger ou indemne", "hospitalisé", "tué"];
+      couche = L.layerGroup(P.map(p => L.circleMarker([p[0], p[1]], {radius: 4 + p[3] * 1.5, color: "#fff", weight: 1, fillColor: coul[p[3]], fillOpacity: 0.9})
+        .bindTooltip(`${p[6] || "?"}, ${p[2]} : ${lib[p[3]]}<br>${p[4] === "1" ? "hors agglomération" : "en agglomération"} · face à : ${p[7]}${p[5] === "5" ? " · sur piste cyclable" : ""}`))).addTo(carte);
+      const top = sud.communes.slice(0, 5).map(c => `${c[0]} ${c[1]}`).join(", ");
+      document.getElementById("note-carte").textContent = `${fmt(P.length)} cyclistes victimes affichés. Communes les plus touchées sur 2020-2024 : ${top}.`;
+      document.getElementById("legende").innerHTML = coul.map((c, i) => `<span><i style="background:${c}"></i>${lib[i]}</span>`).join("");
+    }
+  }
+  document.querySelectorAll("[data-vue]").forEach(b => b.addEventListener("click", () => {
+    vue = b.dataset.vue;
+    document.querySelectorAll("[data-vue]").forEach(x => x.setAttribute("aria-pressed", x === b));
+    if (vue === "france") carte.setView([46.6, 2.4], 6); else carte.setView([43.45, -0.95], 9);
+    dessiner();
+  }));
+  selA.addEventListener("change", dessiner);
+  dessiner();
+});
+</script>
+</body>
+</html>

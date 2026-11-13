@@ -1,0 +1,350 @@
+{
+  "periode": "2020-2024",
+  "cyclistes": 29446,
+  "accidents": 27885,
+  "tues": 1155,
+  "graves": 8080,
+  "part_graves": 0.2744,
+  "par_annee": {
+    "2020": {
+      "victimes": 5317.0,
+      "graves": 1461.0,
+      "tues": 187.0,
+      "part_vae": 0.062
+    },
+    "2021": {
+      "victimes": 6202.0,
+      "graves": 1686.0,
+      "tues": 241.0,
+      "part_vae": 0.087
+    },
+    "2022": {
+      "victimes": 6079.0,
+      "graves": 1708.0,
+      "tues": 258.0,
+      "part_vae": 0.115
+    },
+    "2023": {
+      "victimes": 5954.0,
+      "graves": 1617.0,
+      "tues": 236.0,
+      "part_vae": 0.132
+    },
+    "2024": {
+      "victimes": 5894.0,
+      "graves": 1608.0,
+      "tues": 233.0,
+      "part_vae": 0.136
+    }
+  },
+  "hypotheses": [
+    {
+      "hypothese": "H1 Localisation",
+      "strate": null,
+      "groupe": "Hors agglomération",
+      "reference": "En agglomération",
+      "n_groupe": 5082,
+      "graves_groupe": 3150,
+      "part_groupe": 0.6198,
+      "n_reference": 24364,
+      "graves_reference": 4930,
+      "part_reference": 0.2023,
+      "rapport_risques": 3.06,
+      "ic95": [
+        2.96,
+        3.17
+      ],
+      "p_valeur": 1e-300
+    },
+    {
+      "hypothese": "H2 Éclairage",
+      "strate": "Hors agglomération",
+      "groupe": "Nuit sans éclairage",
+      "reference": "Plein jour",
+      "n_groupe": 349,
+      "graves_groupe": 232,
+      "part_groupe": 0.6648,
+      "n_reference": 4341,
+      "graves_reference": 2687,
+      "part_reference": 0.619,
+      "rapport_risques": 1.07,
+      "ic95": [
+        0.99,
+        1.16
+      ],
+      "p_valeur": 0.101
+    },
+    {
+      "hypothese": "H2 Éclairage",
+      "strate": "En agglomération",
+      "groupe": "Nuit sans éclairage",
+      "reference": "Plein jour",
+      "n_groupe": 300,
+      "graves_groupe": 93,
+      "part_groupe": 0.31,
+      "n_reference": 18833,
+      "graves_reference": 3956,
+      "part_reference": 0.2101,
+      "rapport_risques": 1.48,
+      "ic95": [
+        1.24,
+        1.75
+      ],
+      "p_valeur": 3.57e-05
+    },
+    {
+      "hypothese": "H3 Piste cyclable",
+      "strate": "En agglomération",
+      "groupe": "Sur piste cyclable",
+      "reference": "Sur chaussée",
+      "n_groupe": 4631,
+      "graves_groupe": 466,
+      "part_groupe": 0.1006,
+      "n_reference": 17889,
+      "graves_reference": 4029,
+      "part_reference": 0.2252,
+      "rapport_risques": 0.45,
+      "ic95": [
+        0.41,
+        0.49
+      ],
+      "p_valeur": 1.48e-79
+    },
+    {
+      "hypothese": "H3 Piste cyclable",
+      "strate": "En agglomération, face à une voiture",
+      "groupe": "Sur piste cyclable",
+      "reference": "Sur chaussée",
+      "n_groupe": 1789,
+      "graves_groupe": 226,
+      "part_groupe": 0.1263,
+      "n_reference": 11527,
+      "graves_reference": 2648,
+      "part_reference": 0.2297,
+      "rapport_risques": 0.55,
+      "ic95": [
+        0.48,
+        0.62
+      ],
+      "p_valeur": 6.24e-23
+    },
+    {
+      "hypothese": "H4 Antagoniste",
+      "strate": null,
+      "groupe": "PL, bus, car, tram",
+      "reference": "Véhicule léger",
+      "n_groupe": 1222,
+      "graves_groupe": 577,
+      "part_groupe": 0.4722,
+      "n_reference": 16874,
+      "graves_reference": 4719,
+      "part_reference": 0.2797,
+      "rapport_risques": 1.69,
+      "ic95": [
+        1.58,
+        1.8
+      ],
+      "p_valeur": 4.45e-46
+    },
+    {
+      "hypothese": "H4 Antagoniste",
+      "strate": null,
+      "groupe": "Véhicule utilitaire",
+      "reference": "Véhicule léger",
+      "n_groupe": 2320,
+      "graves_groupe": 691,
+      "part_groupe": 0.2978,
+      "n_reference": 16874,
+      "graves_reference": 4719,
+      "part_reference": 0.2797,
+      "rapport_risques": 1.07,
+      "ic95": [
+        1.0,
+        1.14
+      ],
+      "p_valeur": 0.0718
+    },
+    {
+      "hypothese": "H4 Antagoniste",
+      "strate": null,
+      "groupe": "Aucun (seul)",
+      "reference": "Véhicule léger",
+      "n_groupe": 4851,
+      "graves_groupe": 1419,
+      "part_groupe": 0.2925,
+      "n_reference": 16874,
+      "graves_reference": 4719,
+      "part_reference": 0.2797,
+      "rapport_risques": 1.05,
+      "ic95": [
+        0.99,
+        1.1
+      ],
+      "p_valeur": 0.0828
+    },
+    {
+      "hypothese": "H4 Antagoniste",
+      "strate": null,
+      "groupe": "Deux-roues motorisé",
+      "reference": "Véhicule léger",
+      "n_groupe": 1761,
+      "graves_groupe": 314,
+      "part_groupe": 0.1783,
+      "n_reference": 16874,
+      "graves_reference": 4719,
+      "part_reference": 0.2797,
+      "rapport_risques": 0.64,
+      "ic95": [
+        0.58,
+        0.71
+      ],
+      "p_valeur": 1.02e-19
+    },
+    {
+      "hypothese": "H4 Antagoniste",
+      "strate": null,
+      "groupe": "Autre vélo",
+      "reference": "Véhicule léger",
+      "n_groupe": 1778,
+      "graves_groupe": 241,
+      "part_groupe": 0.1355,
+      "n_reference": 16874,
+      "graves_reference": 4719,
+      "part_reference": 0.2797,
+      "rapport_risques": 0.48,
+      "ic95": [
+        0.43,
+        0.55
+      ],
+      "p_valeur": 6.05e-39
+    },
+    {
+      "hypothese": "H5 VAE",
+      "strate": null,
+      "groupe": "Vélo à assistance électrique",
+      "reference": "Vélo classique",
+      "n_groupe": 3153,
+      "graves_groupe": 848,
+      "part_groupe": 0.269,
+      "n_reference": 26293,
+      "graves_reference": 7232,
+      "part_reference": 0.2751,
+      "rapport_risques": 0.98,
+      "ic95": [
+        0.92,
+        1.04
+      ],
+      "p_valeur": 0.481
+    }
+  ],
+  "taille_commune": [
+    {
+      "taille_ville": "1. Moins de 2 000 hab.",
+      "victimes": 3488,
+      "graves": 2334,
+      "tues": 445,
+      "population": 15065006.0,
+      "victimes_par_100k_par_an": 4.6,
+      "graves_par_100k_par_an": 3.1,
+      "part_graves": 0.669
+    },
+    {
+      "taille_ville": "2. 2 000 à 20 000 hab.",
+      "victimes": 6754,
+      "graves": 3181,
+      "tues": 444,
+      "population": 26394391.0,
+      "victimes_par_100k_par_an": 5.1,
+      "graves_par_100k_par_an": 2.4,
+      "part_graves": 0.471
+    },
+    {
+      "taille_ville": "3. 20 000 à 100 000 hab.",
+      "victimes": 7525,
+      "graves": 1448,
+      "tues": 151,
+      "population": 17167013.0,
+      "victimes_par_100k_par_an": 8.8,
+      "graves_par_100k_par_an": 1.7,
+      "part_graves": 0.192
+    },
+    {
+      "taille_ville": "4. Plus de 100 000 hab.",
+      "victimes": 11619,
+      "graves": 1086,
+      "tues": 107,
+      "population": 10326531.0,
+      "victimes_par_100k_par_an": 22.5,
+      "graves_par_100k_par_an": 2.1,
+      "part_graves": 0.093
+    }
+  ],
+  "antagonistes": [
+    {
+      "antagoniste": "Aucun (seul)",
+      "n": 4851,
+      "part_graves": 0.293
+    },
+    {
+      "antagoniste": "Autre",
+      "n": 215,
+      "part_graves": 0.4
+    },
+    {
+      "antagoniste": "Autre vélo",
+      "n": 1778,
+      "part_graves": 0.136
+    },
+    {
+      "antagoniste": "Deux-roues motorisé",
+      "n": 1761,
+      "part_graves": 0.178
+    },
+    {
+      "antagoniste": "EDP (trottinette…)",
+      "n": 425,
+      "part_graves": 0.078
+    },
+    {
+      "antagoniste": "PL, bus, car, tram",
+      "n": 1222,
+      "part_graves": 0.472
+    },
+    {
+      "antagoniste": "Véhicule léger",
+      "n": 16874,
+      "part_graves": 0.28
+    },
+    {
+      "antagoniste": "Véhicule utilitaire",
+      "n": 2320,
+      "part_graves": 0.298
+    }
+  ],
+  "eclairage": {
+    "Non renseigné": {
+      "n": 2,
+      "part_graves": 0.5
+    },
+    "Plein jour": {
+      "n": 23174,
+      "part_graves": 0.287
+    },
+    "Crépuscule ou aube": {
+      "n": 1669,
+      "part_graves": 0.27
+    },
+    "Nuit sans éclairage public": {
+      "n": 649,
+      "part_graves": 0.501
+    },
+    "Nuit avec éclairage public non allumé": {
+      "n": 134,
+      "part_graves": 0.299
+    },
+    "Nuit avec éclairage public allumé": {
+      "n": 3818,
+      "part_graves": 0.162
+    }
+  }
+}
